@@ -1,0 +1,24 @@
+services:
+  db:
+    image: postgres:16
+    container_name: sportilk_db
+    environment:
+      POSTGRES_DB: sportilk
+      POSTGRES_USER: sportik_db
+      POSTGRES_PASSWORD: root
+    ports:
+      - "5433:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  adminer:
+    image: adminer
+    container_name: adminer
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+    depends_on:
+      - db
+volumes:
+  db_data:

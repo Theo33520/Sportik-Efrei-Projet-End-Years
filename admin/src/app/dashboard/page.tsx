@@ -87,7 +87,7 @@ export default async function UserDashboardPage() {
           <CardHeader pb={2}>
             <Flex justify='space-between' align='center'>
               <Text fontSize='sm' fontWeight='medium'>
-                Temps d'entraînement
+                Temps d&apos;entraînement
               </Text>
               <Clock size={16} color='gray' />
             </Flex>

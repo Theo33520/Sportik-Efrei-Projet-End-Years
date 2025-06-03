@@ -13,13 +13,11 @@ import {
   useToast,
   Spinner,
 } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
 import bgImage from "./assets/loginPage/bg.png";
 import logo from "./assets/loginPage/logo.png";
-import { useRouter } from "next/navigation";
-import { useAuth } from "@/app/auth-context";
 
 interface LoginFormProps {
   email: string;
@@ -33,7 +31,6 @@ export default function Login() {
   });
   const toast = useToast();
   const [isLoading, setIsLoading] = useState(false);
-  const router = useRouter();
 
   const handleLogin = async () => {
     setIsLoading(true);
@@ -51,11 +48,6 @@ export default function Login() {
         }),
         credentials: "include",
       });
-
-      const data = await response.json();
-      const user = data.user.user;
-      const userId = data.user?.user?.id;
-
       if (response.ok) {
         window.location.href = `/dashboard`;
       } else {

@@ -1,5 +1,5 @@
 import {cookies} from "next/headers";
-import {UserDto} from "@sportik/api/dist/src/generated/typing";
+import { UserDto } from "../../../../api/src/generated/typing";
 
 export async function getUser(): Promise<UserDto> {
     const cookieStore = await cookies();

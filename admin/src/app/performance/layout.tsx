@@ -1,7 +1,5 @@
 
 
-import { headers } from "next/headers";
-
 import {getUser} from "@/app/utils/user";
 import DashboardLayout from "@/app/component/layout/DashBoardLayout";
 

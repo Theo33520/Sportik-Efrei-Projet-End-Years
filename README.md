@@ -38,7 +38,7 @@ npm run dev
 cd apps/api
 ````
 
-4. Puis installer les dépendances `npm install` et lancer le projet avec un  :
+4. Puis installer les dépendances `npm install --force` et lancer le projet avec un  :
 
 ```bash
 

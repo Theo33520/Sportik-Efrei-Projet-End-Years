@@ -9,6 +9,7 @@ on:
   pull_request:
     paths:
       - 'apps/admin/**'
+  workflow_dispatch:
 
 jobs:
   admin-build-and-test:

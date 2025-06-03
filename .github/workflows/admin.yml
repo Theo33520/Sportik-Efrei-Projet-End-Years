@@ -31,7 +31,7 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Run Tests
+      - name: Run Tests (optional)
         run: npm run test
 
       - name: Build (optional)

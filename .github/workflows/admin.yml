@@ -1,0 +1,40 @@
+name: Admin Pipeline
+
+on:
+  push:
+    paths:
+      - 'apps/admin/**'
+    branches:
+      - main
+  pull_request:
+    paths:
+      - 'apps/admin/**'
+
+jobs:
+  admin-build-and-test:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: apps/admin
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Run Tests
+        run: npm run test
+
+      - name: Build (optional)
+        run: npm run build

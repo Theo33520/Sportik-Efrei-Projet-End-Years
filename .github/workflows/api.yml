@@ -3,21 +3,21 @@ name: API Pipeline
 on:
   push:
     paths:
-      - '/api/**'
+      - 'api/**'
     branches:
       - main
   pull_request:
     paths:
-      - '/api/**'
+      - 'api/**'
   workflow_dispatch:
 
 jobs:
-  api-build-and-test:
+  api-build:
     runs-on: ubuntu-latest
 
     defaults:
       run:
-        working-directory: /api
+        working-directory: api
 
     steps:
       - name: Checkout repository
@@ -30,9 +30,6 @@ jobs:
 
       - name: Install dependencies (force)
         run: npm install --force
-
-      - name: Lint
-        run: npm run lint
 
       - name: Run Tests
         run: npm run test

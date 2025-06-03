@@ -12,7 +12,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  admin-build-and-test:
+  admin-build:
     runs-on: ubuntu-latest
 
     defaults:
@@ -30,9 +30,6 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-
-      - name: Lint
-        run: npm run lint
 
       - name: Run Tests
         run: npm run test

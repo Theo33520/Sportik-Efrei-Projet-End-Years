@@ -3,12 +3,12 @@ name: API Pipeline
 on:
   push:
     paths:
-      - 'apps/api/**'
+      - '/api/**'
     branches:
       - main
   pull_request:
     paths:
-      - 'apps/api/**'
+      - '/api/**'
   workflow_dispatch:
 
 jobs:
@@ -17,7 +17,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: apps/api
+        working-directory: /api
 
     steps:
       - name: Checkout repository

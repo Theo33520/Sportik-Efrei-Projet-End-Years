@@ -3,12 +3,12 @@ name: Admin Pipeline
 on:
   push:
     paths:
-      - 'apps/admin/**'
+      - '/admin/**'
     branches:
       - main
   pull_request:
     paths:
-      - 'apps/admin/**'
+      - '/admin/**'
   workflow_dispatch:
 
 jobs:
@@ -17,7 +17,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: apps/admin
+        working-directory: /admin
 
     steps:
       - name: Checkout repository

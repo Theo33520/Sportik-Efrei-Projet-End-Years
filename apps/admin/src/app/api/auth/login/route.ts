@@ -18,7 +18,6 @@ export async function POST(request: Request) {
                 { status: responseFromAuth.status }
             );
         }
-        console.log("access_token", data.access_token);
         const response = NextResponse.json({ user: data });
         response.cookies.set("access_token", data.access_token, {
             httpOnly: true,

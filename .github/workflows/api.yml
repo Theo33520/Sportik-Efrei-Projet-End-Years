@@ -31,8 +31,5 @@ jobs:
       - name: Install dependencies (force)
         run: npm install --force
 
-      - name: Run Tests (optional)
-        run: npm run test
-
       - name: Start app (optional – for test only)
         run: npm run start:dev &

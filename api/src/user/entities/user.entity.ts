@@ -2,6 +2,7 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
@@ -11,10 +12,8 @@ import { UserRole } from '../enum/user.enum';
 import { Exclude } from 'class-transformer';
 import { IsEmail, IsNotEmpty, Length } from 'class-validator';
 import { ClubEntity } from '../../club/entities/club.entity';
-import { PerformanceEntity } from '../../performance/entities/performance.entity';
 import { ProgramEntity } from '../../program/entities/program.entity';
 import { NotificationEntity } from '../../notification/entities/notification.entity';
-import { PerformanceRapportEntity } from '../../performance-rapport/entities/performance-rapport';
 import { Entities } from '../../common/entities.enum';
 import { ApiTags } from '@nestjs/swagger';
 
@@ -61,13 +60,25 @@ export class UserEntity {
   @Column({ default: false })
   isEmailVerified: boolean;
 
-  @ManyToOne(() => ClubEntity, (club) => club.users, { nullable: true })
+  @ManyToOne(() => ClubEntity, (club) => club.users, {
+    nullable: true,
+    onDelete: 'SET NULL',
+  })
+  @JoinColumn({ name: 'clubId' })
   club: ClubEntity;
 
-  @OneToMany(() => PerformanceEntity, (performance) => performance.user, {
+  @Column({ nullable: true })
+  clubId: string;
+
+  @ManyToOne(() => ClubEntity, (club) => club.coaches, {
     nullable: true,
+    onDelete: 'SET NULL',
   })
-  performance: PerformanceEntity[];
+  @JoinColumn({ name: 'coachClubId' })
+  coachClub: ClubEntity;
+
+  @Column({ nullable: true })
+  coachClubId: string;
 
   @OneToMany(() => ProgramEntity, (program) => program.user, { nullable: true })
   program: ProgramEntity[];
@@ -78,13 +89,6 @@ export class UserEntity {
     { nullable: true },
   )
   notifications: NotificationEntity[];
-
-  @OneToMany(
-    () => PerformanceRapportEntity,
-    (performanceRapport) => performanceRapport.athlete,
-    { nullable: true },
-  )
-  performanceRapport: PerformanceRapportEntity[];
 
   @Column({ default: false, nullable: true })
   isLoggedIn: boolean;

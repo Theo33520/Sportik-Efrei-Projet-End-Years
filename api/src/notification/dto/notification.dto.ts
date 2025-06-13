@@ -21,9 +21,8 @@ export class NotificationDto {
   name_sender: string;
 
   @ApiProperty()
-  title: string
+  title: string;
 }
-
 
 const capitalize = (s: string): string =>
   s ? s.charAt(0).toUpperCase() + s.slice(1).toLowerCase() : '';
@@ -39,5 +38,5 @@ export const toNotificationDto = (
   name_sender: notification.sender
     ? `${capitalize(notification.sender.firstname)} ${capitalize(notification.sender.lastname)}`
     : '',
-    title: notification.title
+  title: notification.title,
 });

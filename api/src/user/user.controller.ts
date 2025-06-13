@@ -25,7 +25,6 @@ export class UserController {
     type: UserDto,
   })
   async getUserFromToken(@Request() req: any): Promise<UserDto> {
-    console.log('Request user:', req.user);
     if (!req.user) {
       throw new Error('User not found in request');
     }

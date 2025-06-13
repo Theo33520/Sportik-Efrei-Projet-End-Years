@@ -8,49 +8,15 @@ import {
   CardBody,
   VStack,
   HStack,
-  Progress,
   Flex,
 } from "@chakra-ui/react";
-import { getUser } from "@/app/utils/user";
-import { Activity, Calendar, Clock, TrendingUp } from "lucide-react";
-
-const activity = [
-  {
-    date: "Aujourd'hui",
-    activity: "Course à pied",
-    duration: "30 min",
-    intensity: "Modérée",
-  },
-  {
-    date: "Hier",
-    activity: "Musculation",
-    duration: "45 min",
-    intensity: "Intense",
-  },
-  {
-    date: "20 Mai",
-    activity: "Natation",
-    duration: "1h",
-    intensity: "Modérée",
-  },
-  { date: "18 Mai", activity: "Yoga", duration: "45 min", intensity: "Légère" },
-  {
-    date: "15 Mai",
-    activity: "Vélo",
-    duration: "1h 30min",
-    intensity: "Intense",
-  },
-];
-
-const objectifs = [
-  { goal: "Courir 20km par semaine", progress: 65 },
-  { goal: "3 séances de musculation", progress: 33 },
-  { goal: "Perdre 5kg", progress: 40 },
-  { goal: "Améliorer l'endurance", progress: 80 },
-];
+import { getUser, getUserSummary } from "@/app/utils/user";
+import { Activity, Calendar, Clock} from "lucide-react";
+import { formatDuration, formatSessionDate } from "../utils/convertHours";
 
 export default async function UserDashboardPage() {
   const user_data = await getUser();
+  const userSummary = await getUserSummary(user_data?.user_id);
 
   return (
     <Box p={6}>
@@ -75,10 +41,7 @@ export default async function UserDashboardPage() {
           </CardHeader>
           <CardBody>
             <Text fontSize='2xl' fontWeight='bold'>
-              {user_data?.sessionsCompleted ?? "0"}
-            </Text>
-            <Text fontSize='xs' color='gray.500'>
-              +2 depuis la semaine dernière
+              {userSummary.sessionCount ?? "0"}
             </Text>
           </CardBody>
         </Card>
@@ -94,33 +57,12 @@ export default async function UserDashboardPage() {
           </CardHeader>
           <CardBody>
             <Text fontSize='2xl' fontWeight='bold'>
-              {user_data?.trainingTime ?? "0"} h
-            </Text>
-            <Text fontSize='xs' color='gray.500'>
-              +45min depuis la semaine dernière
-            </Text>
-          </CardBody>
-        </Card>
-
-        <Card>
-          <CardHeader pb={2}>
-            <Flex justify='space-between' align='center'>
-              <Text fontSize='sm' fontWeight='medium'>
-                Progression
-              </Text>
-              <TrendingUp size={16} color='gray' />
-            </Flex>
-          </CardHeader>
-          <CardBody>
-            <Text fontSize='2xl' fontWeight='bold'>
-              {user_data?.progression ?? "0"}%
-            </Text>
-            <Text fontSize='xs' color='gray.500'>
-              Depuis le mois dernier
+              {userSummary?.totalDuration
+                ? formatDuration(userSummary?.totalDuration)
+                : "0"}
             </Text>
           </CardBody>
         </Card>
-
         <Card>
           <CardHeader pb={2}>
             <Flex justify='space-between' align='center'>
@@ -132,10 +74,7 @@ export default async function UserDashboardPage() {
           </CardHeader>
           <CardBody>
             <Text fontSize='2xl' fontWeight='bold'>
-              {user_data?.nextSessionDate ?? "Aucune séance prévue"}
-            </Text>
-            <Text fontSize='xs' color='gray.500'>
-              10:00 - Musculation
+              {userSummary?.nextSession ?? "Aucune séance prévue"}
             </Text>
           </CardBody>
         </Card>
@@ -151,49 +90,18 @@ export default async function UserDashboardPage() {
           </CardHeader>
           <CardBody>
             <VStack spacing={4} align='stretch'>
-              {activity.map((item, index) => (
+              {userSummary?.lastSessions.map((session: { program: { title: string }; startDate: string }, index: number) => (
                 <HStack key={index} align='start'>
                   <Box p={2} bg='green.100' rounded='full'>
                     <Activity size={16} color='#38A169' />
                   </Box>
                   <Box>
-                    <Text fontWeight='medium'>{item.activity}</Text>
+                    <Text fontWeight='medium'>{session.program.title}</Text>
                     <Text fontSize='sm' color='gray.500'>
-                      {item.date} • {item.duration} • {item.intensity}
+                      {formatSessionDate(session.startDate)}
                     </Text>
                   </Box>
                 </HStack>
-              ))}
-            </VStack>
-          </CardBody>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <Heading size='sm'>Objectifs</Heading>
-            <Text fontSize='sm' color='gray.500'>
-              Progression vers vos objectifs
-            </Text>
-          </CardHeader>
-          <CardBody>
-            <VStack spacing={4} align='stretch'>
-              {objectifs.map((item, index) => (
-                <Box key={index}>
-                  <Flex justify='space-between' mb={1}>
-                    <Text fontSize='sm' fontWeight='medium'>
-                      {item.goal}
-                    </Text>
-                    <Text fontSize='sm' fontWeight='medium'>
-                      {item.progress}%
-                    </Text>
-                  </Flex>
-                  <Progress
-                    value={item.progress}
-                    size='sm'
-                    colorScheme='green'
-                    rounded='full'
-                  />
-                </Box>
               ))}
             </VStack>
           </CardBody>

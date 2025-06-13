@@ -19,7 +19,6 @@ import {
     Bell,
     Dumbbell as TrainingIcon,
     User,
-    BarChart3,
     LogOut,
     Search,
 } from "lucide-react"
@@ -36,10 +35,9 @@ interface SideBarProps {
 
 const navItems = [
     { name: "Tableau de bord", path: "/dashboard", icon: Home },
-    { name: "Notifications", path: "/dashboard/notifications", icon: Bell },
-    { name: "Entraînement", path: "/dashboard/training", icon: TrainingIcon },
-    { name: "Profil", path: "/dashboard/profile", icon: User },
-    { name: "Performance", path: "/dashboard/performance", icon: BarChart3 },
+    { name: "Notifications", path: "/notifications", icon: Bell },
+    { name: "Entraînement", path: "/program", icon: TrainingIcon },
+    { name: "Profil", path: "/profile", icon: User },
 ]
 
 export default function SidebarDashboard({ isOpen, firstname, lastname, onLogout }: SideBarProps) {
@@ -57,7 +55,7 @@ export default function SidebarDashboard({ isOpen, firstname, lastname, onLogout
                 <Flex align="center" gap={3} mb={4}>
                     <Dumbbell size={22} color="#1A365D" /> {/* bleu marine */}
                     <Text fontSize="xl" fontWeight="bold" color="blue.800">
-                        Sportika
+                        Sportik
                     </Text>
                 </Flex>
 
@@ -77,8 +75,6 @@ export default function SidebarDashboard({ isOpen, firstname, lastname, onLogout
                     />
                 </InputGroup>
             </Box>
-
-            {/* Navigation */}
             <VStack align="stretch" spacing={1} p={4} flex="1" overflowY="auto">
                 {navItems.map((item) => (
                     <ChakraLink
@@ -106,8 +102,6 @@ export default function SidebarDashboard({ isOpen, firstname, lastname, onLogout
                     </ChakraLink>
                 ))}
             </VStack>
-
-            {/* Footer */}
             <Box p={4} borderTop="1px solid" borderColor="gray.200">
                 <Flex align="center" gap={3}>
                     <Avatar name={`${firstname} ${lastname}`} size="sm" />

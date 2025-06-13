@@ -20,24 +20,16 @@ export interface NotificationDto {
   title: string;
 }
 
-export interface PerformanceDto {
-  /**
-   * @format date-time
-   * @example "2025-05-09T10:30:00Z"
-   */
-  date: string;
-  /** @example "Course du matin" */
-  description?: string;
-  /** @example "km" */
-  unit: "km" | "mi" | "min" | "h" | "km/h" | "mi/h" | "s";
-  /**
-   * La valeur mesurée (ex: distance, durée, etc.)
-   * @example 5.2
-   */
-  value: number;
+export interface TrainingSummaryDto {
+  lastSessions: string[] | null;
+  nextSession: string | null;
+  sessionCount: number;
+  totalDuration: number;
 }
 
 export interface UserDto {
+  clubName: string;
+  email: string;
   firstname: string;
   isLoggedIn: boolean;
   lastname: string;
@@ -263,12 +255,28 @@ export class Api<
      * No description
      *
      * @tags user
+     * @name GetUserFromToken
+     * @request GET:/user/me
+     * @response `200` `UserDto` Get user from token
+     */
+    getUserFromToken: (params: RequestParams = {}) =>
+      this.request<UserDto, any>({
+        path: `/user/me`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags user
      * @name GetAllUsers
      * @request GET:/user
-     * @response `200` `UserDto` Get all users
+     * @response `200` `(UserDto)[]` Get all users
      */
     getAllUsers: (params: RequestParams = {}) =>
-      this.request<UserDto, any>({
+      this.request<UserDto[], any>({
         path: `/user`,
         method: "GET",
         format: "json",
@@ -281,7 +289,7 @@ export class Api<
      * @tags user
      * @name GetUserById
      * @request GET:/user/{id}
-     * @response `200` `UserDto` Get all users by id
+     * @response `200` `UserDto` Get user by id
      */
     getUserById: (id: string, params: RequestParams = {}) =>
       this.request<UserDto, any>({
@@ -315,7 +323,7 @@ export class Api<
      * @tags user
      * @name GetUserByIdToProfil
      * @request GET:/user/{id}/profile
-     * @response `200` `UserProfileDto` Get  users by id to profil
+     * @response `200` `UserProfileDto` Get  user by id to profil
      */
     getUserByIdToProfil: (id: string, params: RequestParams = {}) =>
       this.request<UserProfileDto, any>({
@@ -357,22 +365,6 @@ export class Api<
         format: "json",
         ...params,
       }),
-
-    /**
-     * No description
-     *
-     * @tags user
-     * @name GetUserFromToken
-     * @request GET:/user/me
-     * @response `200` `UserDto` Get user from token
-     */
-    getUserFromToken: (params: RequestParams = {}) =>
-      this.request<UserDto, any>({
-        path: `/user/me`,
-        method: "GET",
-        format: "json",
-        ...params,
-      }),
   };
   program = {
     /**
@@ -395,12 +387,12 @@ export class Api<
      *
      * @tags program
      * @name ProgramControllerFindOne
-     * @request GET:/program/{id}
+     * @request GET:/program/{userId}
      * @response `200` `void`
      */
-    programControllerFindOne: (id: string, params: RequestParams = {}) =>
+    programControllerFindOne: (userId: string, params: RequestParams = {}) =>
       this.request<void, any>({
-        path: `/program/${id}`,
+        path: `/program/${userId}`,
         method: "GET",
         ...params,
       }),
@@ -438,39 +430,6 @@ export class Api<
         ...params,
       }),
   };
-  performance = {
-    /**
-     * No description
-     *
-     * @tags performance
-     * @name GetAllPerformances
-     * @request GET:/performance
-     * @response `200` `PerformanceDto` Get all performances
-     */
-    getAllPerformances: (params: RequestParams = {}) =>
-      this.request<PerformanceDto, any>({
-        path: `/performance`,
-        method: "GET",
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags performance
-     * @name GetAllPerformancesByUserId
-     * @request GET:/performance/{user_id}
-     * @response `200` `(PerformanceDto)[]` Get all performances by user id
-     */
-    getAllPerformancesByUserId: (userId: string, params: RequestParams = {}) =>
-      this.request<PerformanceDto[], any>({
-        path: `/performance/${userId}`,
-        method: "GET",
-        format: "json",
-        ...params,
-      }),
-  };
   auth = {
     /**
      * No description
@@ -499,6 +458,76 @@ export class Api<
       this.request<void, any>({
         path: `/auth/log-out`,
         method: "POST",
+        ...params,
+      }),
+  };
+  trainingSession = {
+    /**
+     * No description
+     *
+     * @tags trainingSession
+     * @name TrainingSessionControllerFindAll
+     * @request GET:/trainingSession
+     * @response `200` `void`
+     */
+    trainingSessionControllerFindAll: (params: RequestParams = {}) =>
+      this.request<void, any>({
+        path: `/trainingSession`,
+        method: "GET",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags trainingSession
+     * @name TrainingSessionControllerFindByUserId
+     * @request GET:/trainingSession/athlete/{userId}
+     * @response `200` `void`
+     */
+    trainingSessionControllerFindByUserId: (
+      userId: string,
+      params: RequestParams = {},
+    ) =>
+      this.request<void, any>({
+        path: `/trainingSession/athlete/${userId}`,
+        method: "GET",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags trainingSession
+     * @name TrainingSessionControllerFindByUserIdCoach
+     * @request GET:/trainingSession/coach/{userId}
+     * @response `200` `void`
+     */
+    trainingSessionControllerFindByUserIdCoach: (
+      userId: string,
+      params: RequestParams = {},
+    ) =>
+      this.request<void, any>({
+        path: `/trainingSession/coach/${userId}`,
+        method: "GET",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags trainingSession
+     * @name TrainingSessionControllerSessionCompletedOnCurrentWeek
+     * @request GET:/trainingSession/dashboardSummary/{userId}
+     * @response `default` `TrainingSummaryDto`
+     */
+    trainingSessionControllerSessionCompletedOnCurrentWeek: (
+      userId: string,
+      params: RequestParams = {},
+    ) =>
+      this.request<any, TrainingSummaryDto>({
+        path: `/trainingSession/dashboardSummary/${userId}`,
+        method: "GET",
         ...params,
       }),
   };

@@ -25,6 +25,7 @@ export class UserService {
   async findById(id: string): Promise<UserDto> {
     const user = await this.userRepository.findOne({
       where: { id: String(id) },
+      relations: ['club']
     });
     if (!user) {
       throw new HttpException('User not found', HttpStatus.NOT_FOUND);
@@ -90,24 +91,5 @@ export class UserService {
       where: { id: String(id) },
     });
     return { role: user.role };
-  }
-
-  async getUserFromToken(token: string): Promise<UserDto> {
-    try {
-      const decoded = jwt.verify(
-          token,
-          jwtConstants.secret
-      ) as { id: string };
-
-      const user = await this.userRepository.findOne({
-        where: { id: decoded.id },
-      });
-      if (!user) {
-        throw new HttpException('User not found', HttpStatus.NOT_FOUND);
-      }
-      return toUserDto(user);
-    } catch (error) {
-      throw new HttpException('Invalid token', HttpStatus.UNAUTHORIZED);
-    }
   }
 }

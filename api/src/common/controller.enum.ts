@@ -8,4 +8,5 @@ export enum Controllers {
   CLUB = 'club',
   AUTH = 'auth',
   TRAINING_SESSION = 'trainingSession',
+  MAIL = 'mail',
 }

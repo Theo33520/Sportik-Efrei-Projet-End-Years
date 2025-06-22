@@ -2,7 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
-import { getUser } from "../utils/user";
+import { getUser } from "../utils/fetchAuth";
 import api from "../core/client";
 
 export async function updateUserAction(formData: FormData) {

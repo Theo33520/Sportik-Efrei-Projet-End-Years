@@ -19,7 +19,6 @@ export class ProgramSeederService implements OnApplicationBootstrap {
   ) {}
 
   async onApplicationBootstrap() {
-
     try {
       const count = await this.programRepository.count();
 
@@ -27,13 +26,14 @@ export class ProgramSeederService implements OnApplicationBootstrap {
         return;
       }
 
-      const allUsers = await this.userRepository.find();
       const user = await this.userRepository.findOne({
         where: { email: process.env.ATHLETE_EMAIL },
       });
+
       const coach = await this.userRepository.findOne({
         where: { email: process.env.COACH_EMAIL },
       });
+
       if (!user || !coach) {
         return;
       }
@@ -43,15 +43,11 @@ export class ProgramSeederService implements OnApplicationBootstrap {
           title: 'Programme de course à pied',
           description:
             'Un programme pour améliorer votre endurance en course à pied.',
-          duration: 8,
-          user,
           coach,
         },
         {
           title: 'Programme de musculation',
           description: 'Un programme pour développer la masse musculaire.',
-          duration: 12,
-          user,
           coach,
         },
       ];
@@ -81,14 +77,14 @@ export class ProgramSeederService implements OnApplicationBootstrap {
 
           const training = this.trainingRepository.create({
             program: savedProgram,
-            title: `Séance ${i} - ${savedProgram.title}`,
+            name: `Séance ${i} - ${savedProgram.title}`,
             description: `Description de la séance ${i}`,
             startDate,
             endDate,
             isCompleted,
           });
 
-          const savedTraining = await this.trainingRepository.save(training);
+          await this.trainingRepository.save(training);
         }
       }
     } catch (error) {

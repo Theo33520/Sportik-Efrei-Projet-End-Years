@@ -11,6 +11,6 @@ export class TrainingSummaryDto {
   @ApiProperty({ nullable: true })
   nextSession: string;
 
-  @ApiProperty({ nullable: true })
+  @ApiProperty({ nullable: true, type: [TrainingSessionDto] })
   lastSessions: TrainingSessionDto[];
 }

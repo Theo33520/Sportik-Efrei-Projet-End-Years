@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="d3a7c5f7-1a77-4974-8aa0-7a60e0cd5bcd" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/admin/src/app/actions/updateProfilForm.ts" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/app/actions/updateProfilForm.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/src/app/component/DashboardLayout.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/src/app/component/SideBarClient.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/app/component/SideBarClient.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/src/app/component/layout/Sidebar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/app/component/layout/Sidebar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/src/app/dashboard/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/app/dashboard/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/src/app/dashboard/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/app/dashboard/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/src/app/notifications/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/app/notifications/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/src/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/app/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/src/app/profil/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/app/profil/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/src/app/profil/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/app/profil/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/src/app/program/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/app/program/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/src/app/utils/user.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/src/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/src/club/club.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/club/club.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/src/club/club.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/club/club.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/src/club/entities/club.entity.ts" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/club/entities/club.entity.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/src/common/controller.enum.ts" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/common/controller.enum.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/src/generated/typing.ts" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/generated/typing.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/src/program/dto/program.dto.ts" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/program/dto/program.dto.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/src/program/entities/program.entity.ts" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/program/entities/program.entity.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/src/program/program.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/program/program.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/src/program/program.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/program/program.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/src/seeder/program.seeder.ts" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/seeder/program.seeder.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/src/seeder/user.seeder.ts" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/seeder/user.seeder.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/src/trainingSession/dto/Training-summary.dto.ts" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/trainingSession/dto/Training-summary.dto.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/src/trainingSession/dto/TranningSession.dto.ts" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/trainingSession/dto/TranningSession.dto.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/src/trainingSession/trainingSession.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/trainingSession/trainingSession.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/src/trainingSession/trainingSession.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/trainingSession/trainingSession.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/src/user/dto/user-roleDto.ts" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/user/dto/user-roleDto.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/src/user/dto/userDto.ts" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/user/dto/userDto.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/src/user/entities/user.entity.ts" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/user/entities/user.entity.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/src/user/user.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/user/user.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/src/user/user.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/user/user.service.ts" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="TypeScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="KubernetesApiPersistence">{}</component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="php" />
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
+  <component name="ProjectId" id="2yKXVJwzWSrMFsIIXC98WBLXghn" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Node.js.program.service.ts.executor": "Debug",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "Shell Script.Api.executor": "Run",
+    "git-widget-placeholder": "main",
+    "junie.onboarding.icon.badge.shown": "true",
+    "last_opened_file_path": "/Users/neat/Downloads/Sportik-Efrei-Projet-End-Years",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "prettierjs.PrettierConfiguration.Package": "/Users/neat/Downloads/Sportik-Efrei-Projet-End-Years/api/node_modules/prettier",
+    "settings.editor.selected.configurable": "reference.settingsdialog.IDE.editor.colors.Color Scheme Font",
+    "ts.external.directory.path": "/Users/neat/Downloads/Sportik-Efrei-Projet-End-Years/admin/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/api/src/program/dto" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="program.service.ts" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/api/src/program/program.service.ts" typescript-loader="bundled" working-dir="$PROJECT_DIR$/api/src/program">
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Node.js.program.service.ts" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-b26f3e71634d-JavaScript-WS-251.26094.131" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d3a7c5f7-1a77-4974-8aa0-7a60e0cd5bcd" name="Changes" comment="" />
+      <created>1749584262067</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1749584262067</updated>
+      <workItem from="1749584264051" duration="683000" />
+      <workItem from="1749584951219" duration="114000" />
+      <workItem from="1749585091589" duration="15000" />
+      <workItem from="1749627790844" duration="10842000" />
+      <workItem from="1749670771804" duration="2000" />
+      <workItem from="1749714073030" duration="105000" />
+      <workItem from="1750509270328" duration="13000" />
+      <workItem from="1750509309693" duration="187000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

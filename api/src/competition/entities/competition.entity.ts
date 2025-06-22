@@ -1,8 +1,10 @@
 import {
   Column,
   Entity,
+  JoinColumn,
   JoinTable,
   ManyToMany,
+  ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { UserEntity } from '../../user/entities/user.entity';
@@ -22,7 +24,11 @@ export class CompetitionEntity {
   @Column()
   date: Date;
 
-  @ManyToMany(() => UserEntity)
+  @ManyToMany(() => UserEntity, (user) => user.competitions)
   @JoinTable({ name: 'competition_users' })
   users: UserEntity[];
+
+  @ManyToOne(() => UserEntity, { nullable: true })
+  @JoinColumn({ name: 'coach_id' })
+  coach: UserEntity;
 }

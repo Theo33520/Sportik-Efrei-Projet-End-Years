@@ -34,7 +34,7 @@ export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const toast = useToast();
-
+  
   const handleLogin = async () => {
     setIsLoading(true);
     try {
@@ -69,7 +69,6 @@ export default function Login() {
     e.preventDefault();
     handleLogin();
   };
-
   return (
     <Box
       minH='100vh'

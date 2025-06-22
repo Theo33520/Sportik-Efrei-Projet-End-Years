@@ -4,7 +4,6 @@ import { TrainingSessionEntity } from '../entities/trainingSession.entity';
 
 export class TrainingSessionDto {
 
-
   @ApiProperty()
   program: ProgramDto;
 

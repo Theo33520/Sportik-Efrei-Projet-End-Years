@@ -4,7 +4,6 @@
 import { useRouter } from "next/navigation";
 import { useToast } from "@chakra-ui/react";
 import SidebarDashboard from "@/app/component/layout/Sidebar";
-import { UserRoleDto } from "../../../../api/src/generated/typing";
 
 export default function SidebarClient({
   user,

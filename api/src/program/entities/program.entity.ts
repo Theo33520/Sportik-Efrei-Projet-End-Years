@@ -16,20 +16,17 @@ export class ProgramEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @ManyToOne(() => UserEntity, (user) => user.program)
-  user: UserEntity;
-
   @ManyToOne(() => UserEntity)
   coach: UserEntity;
+
+  @OneToMany(() => UserEntity, (user) => user.program)
+  athletes: UserEntity[];
 
   @Column()
   title: string;
 
-  @Column({nullable: true })
+  @Column({ nullable: true })
   description: string;
-
-  @Column()
-  duration: number;
 
   @CreateDateColumn()
   createdAt: Date;

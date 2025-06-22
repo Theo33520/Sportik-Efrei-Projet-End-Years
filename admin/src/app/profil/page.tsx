@@ -19,7 +19,7 @@ import {
   IconButton,
 } from "@chakra-ui/react";
 import { Edit, Save } from "lucide-react";
-import { getUser } from "../utils/user";
+import { getUser } from "../utils/fetchAuth";
 import { updateUserAction } from "../actions/updateProfilForm";
 
 const Profil = async () => {
@@ -84,7 +84,7 @@ const Profil = async () => {
           bg='white'
           shadow='sm'
         >
-          <Tabs variant='enclosed' colorScheme='green'>
+          <Tabs variant='enclosed' colorScheme='teal'>
             <TabList>
               <Tab>Informations</Tab>
             </TabList>
@@ -119,7 +119,7 @@ const Profil = async () => {
                     >
                     </Grid>
                     <Button
-                      colorScheme='green'
+                      colorScheme='teal'
                       leftIcon={<Save size={16} />}
                       type='submit'
                     >

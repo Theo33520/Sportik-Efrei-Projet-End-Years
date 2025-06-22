@@ -18,7 +18,7 @@ export class TrainingSessionEntity {
   program: ProgramEntity;
 
   @Column({ type: 'varchar', length: 255 })
-  title: string;
+  name: string;
 
   @Column({ type: 'varchar', length: 255 })
   description: string;

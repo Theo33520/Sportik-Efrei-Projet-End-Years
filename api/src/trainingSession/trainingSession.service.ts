@@ -7,6 +7,9 @@ import { startOfWeek, endOfWeek, isWithinInterval, differenceInMinutes, compareA
 import { ProgramEntity } from 'src/program/entities/program.entity';
 import { UserRole } from 'src/user/enum/user.enum';
 import { TrainingSummaryDto } from './dto/Training-summary.dto';
+import { console } from 'inspector';
+import { logger } from '@mikro-orm/nestjs';
+import { toProgramDto } from 'src/program/dto/program.dto';
 
 
 @Injectable()
@@ -28,7 +31,7 @@ export class TrainingSessionService {
 
   async findByUserIdAthelete(userId: string): Promise<TrainingSessionDto[]> {
     const sessions = await this.trainingSessionRepository.find({
-      where: { program: { user: { id: userId, role: UserRole.ATHLETE } } },
+      where: { program: { athletes: { id: userId, role: UserRole.ATHLETE } } },
       relations: ['program'],
     });
     return sessions.map(toTrainingSessionDto);
@@ -45,62 +48,65 @@ export class TrainingSessionService {
   async getTrainingSummaryForCurrentWeek(
     userId: string,
   ): Promise<TrainingSummaryDto> {
-    const now = new Date();
-    const currentWeekStart = startOfWeek(now, { weekStartsOn: 1 });
-    const currentWeekEnd = endOfWeek(now, { weekStartsOn: 1 });
-
-    const sessions = await this.trainingSessionRepository.find({
-      where: {
-        program: {
-          user: {
-            id: userId,
-            role: UserRole.ATHLETE,
-          },
-        },
-      },
-      relations: ['program', 'program.user'],
+    const program = await this.programRepository.findOne({
+      where: { athletes: { id: userId, role: UserRole.ATHLETE }, },
+      relations: ['athletes', 'training'],
     });
 
-    let totalDuration = 0;
-    let sessionCount = 0;
-    let nextSessionTitle: string | null = null;
+    if (!program) {
+      throw new Error(`Program not found for user ID ${userId}`);
+    }
 
-    const upcomingSessions: TrainingSessionEntity[] = [];
-    const lastSessions: TrainingSessionEntity[] = [];
+    const now = new Date();
+    const weekStart = startOfWeek(now, { weekStartsOn: 1 });
+    const weekEnd = endOfWeek(now, { weekStartsOn: 1 });
 
-    for (const session of sessions) {
-      const isInThisWeek = isWithinInterval(session.startDate, {
-        start: currentWeekStart,
-        end: currentWeekEnd,
-      });
+    const trainingsThisWeek = program.training.filter((session) => {
+      const sessionDate = new Date(session.startDate);
+      return isWithinInterval(sessionDate, { start: weekStart, end: weekEnd });
+    });
 
-      if (isInThisWeek) {
-        if (session.isCompleted) {
-          totalDuration += differenceInMinutes(
-            session.endDate,
-            session.startDate,
-          );
-          sessionCount++;
-          lastSessions.push(session);
-        } else if (isAfter(session.startDate, now)) {
-          upcomingSessions.push(session);
-        }
+    for (const session of trainingsThisWeek) {
+      if (new Date(session.endDate) < now) {
+        session.isCompleted = true;
       }
     }
 
-    if (upcomingSessions.length > 0) {
-      upcomingSessions.sort((a, b) => compareAsc(a.startDate, b.startDate));
-      nextSessionTitle = upcomingSessions[0].title;
-    }
-    const last5Sessions = lastSessions
-      .sort((a, b) => compareAsc(b.startDate, a.startDate))
+    const completedSessions = trainingsThisWeek.filter(
+      (session) => session.isCompleted,
+    );
+    const incompleteSessions = trainingsThisWeek.filter(
+      (session) => !session.isCompleted,
+    );
+
+    const totalMinutes = completedSessions.reduce((sum, session) => {
+      const start = new Date(session.startDate).getTime();
+      const end = new Date(session.endDate).getTime();
+      return sum + (end - start) / 1000 / 60;
+    }, 0);
+    const nextSession = incompleteSessions.sort(
+      (a, b) =>
+        new Date(a.startDate).getTime() - new Date(b.startDate).getTime(),
+    )[0];
+
+    const lastSessions = completedSessions
+      .sort(
+        (a, b) =>
+          new Date(b.startDate).getTime() - new Date(a.startDate).getTime(),
+      )
       .slice(0, 5);
 
-    return {
-      totalDuration,
-      sessionCount,
-      nextSession: nextSessionTitle,
-      lastSessions: last5Sessions.map(toTrainingSessionDto),
+    const result: TrainingSummaryDto = {
+      totalDuration: totalMinutes,
+      sessionCount: completedSessions.length,
+      nextSession: nextSession ? nextSession.name : null,
+      lastSessions: lastSessions.map((session) => ({
+        startDate: session.startDate,
+        endDate: session.endDate,
+        isCompleted: session.isCompleted,
+        program: toProgramDto(program)
+      })),
     };
+    return result;
   }
 }

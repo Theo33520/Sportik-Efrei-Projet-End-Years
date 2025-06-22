@@ -3,6 +3,7 @@ import {
   CreateDateColumn,
   Entity,
   JoinColumn,
+  ManyToMany,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
@@ -16,6 +17,8 @@ import { ProgramEntity } from '../../program/entities/program.entity';
 import { NotificationEntity } from '../../notification/entities/notification.entity';
 import { Entities } from '../../common/entities.enum';
 import { ApiTags } from '@nestjs/swagger';
+import { AthleteCategory } from '../enum/atheleteCategory.enum';
+import { CompetitionEntity } from 'src/competition/entities/competition.entity';
 
 @Entity({ name: Entities.USER })
 @ApiTags(Entities.USER)
@@ -49,6 +52,29 @@ export class UserEntity {
   role: UserRole;
 
   @Column({ nullable: true })
+  phoneNumber?: string;
+
+  @Column({ nullable: true })
+  Age?: number;
+
+  @Column({ nullable: true })
+  height?: number;
+
+  @Column({ nullable: true })
+  weight?: number;
+
+  @Column({ nullable: true })
+  address?: string;
+
+  @Column({
+    type: 'enum',
+    enum: AthleteCategory,
+    default: AthleteCategory.CADET,
+    nullable: true,
+  })
+  category?: AthleteCategory;
+
+  @Column({ nullable: true })
   profilePicture?: string;
 
   @CreateDateColumn({ nullable: true })
@@ -56,9 +82,6 @@ export class UserEntity {
 
   @UpdateDateColumn({ nullable: true })
   updatedAt: Date;
-
-  @Column({ default: false })
-  isEmailVerified: boolean;
 
   @ManyToOne(() => ClubEntity, (club) => club.users, {
     nullable: true,
@@ -70,18 +93,14 @@ export class UserEntity {
   @Column({ nullable: true })
   clubId: string;
 
-  @ManyToOne(() => ClubEntity, (club) => club.coaches, {
+  @ManyToOne(() => ProgramEntity, (program) => program.athletes, {
     nullable: true,
     onDelete: 'SET NULL',
   })
-  @JoinColumn({ name: 'coachClubId' })
-  coachClub: ClubEntity;
+  program: ProgramEntity;
 
   @Column({ nullable: true })
-  coachClubId: string;
-
-  @OneToMany(() => ProgramEntity, (program) => program.user, { nullable: true })
-  program: ProgramEntity[];
+  programId: string;
 
   @OneToMany(
     () => NotificationEntity,
@@ -92,4 +111,10 @@ export class UserEntity {
 
   @Column({ default: false, nullable: true })
   isLoggedIn: boolean;
+
+  @ManyToMany(() => CompetitionEntity, (competition) => competition.users)
+  competitions: CompetitionEntity[];
+
+  @OneToMany(() => CompetitionEntity, (competition) => competition.coach)
+  competitionsAsCoach: CompetitionEntity[];
 }

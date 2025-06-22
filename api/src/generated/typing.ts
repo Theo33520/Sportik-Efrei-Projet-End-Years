@@ -10,6 +10,30 @@
  * ---------------------------------------------------------------
  */
 
+export interface AthleteDto {
+  competitions: CompetititonAthleteDto[];
+  programDescription: string;
+  programTitle: string;
+  trainings: TrainingDto[];
+}
+
+export interface CompetitionDto {
+  coachId?: string;
+  /** @format date-time */
+  date: string;
+  id: string;
+  location: string;
+  title: string;
+  users: string[];
+}
+
+export interface CompetititonAthleteDto {
+  /** @format date-time */
+  date: string;
+  location: string;
+  title: string;
+}
+
 export interface NotificationDto {
   description: string;
   name_sender: string;
@@ -20,20 +44,60 @@ export interface NotificationDto {
   title: string;
 }
 
+export interface ProgramDto {
+  athleteId: string[];
+  coachId: string;
+  countAthletes: number;
+  description: string;
+  id: string;
+  title: string;
+  trainings: TrainingDto[];
+}
+
+export type ProgramEntity = object;
+
+export type SendAthleteCredentialsDto = object;
+
+export interface TrainingDto {
+  description: string;
+  /** @format date-time */
+  endDate: string;
+  name: string;
+  /** @format date-time */
+  startDate: string;
+}
+
+export interface TrainingSessionDto {
+  /** @format date-time */
+  endDate: string;
+  isCompleted: boolean;
+  program: ProgramDto;
+  /** @format date-time */
+  startDate: string;
+}
+
 export interface TrainingSummaryDto {
-  lastSessions: string[] | null;
+  lastSessions: TrainingSessionDto[] | null;
   nextSession: string | null;
   sessionCount: number;
   totalDuration: number;
 }
 
 export interface UserDto {
+  Age: number;
+  address: string;
+  athleteCategory: string;
+  clubId: string;
   clubName: string;
   email: string;
   firstname: string;
+  height: number;
   isLoggedIn: boolean;
   lastname: string;
+  phoneNumber: string;
+  role: string;
   user_id: string;
+  weight: number;
 }
 
 export type UserEntity = object;
@@ -50,6 +114,13 @@ export interface UserProfileDto {
 export interface UserRoleDto {
   /** User role */
   role: "ATHLETE" | "COACH" | "ADMINISTRATOR";
+}
+
+export interface UserSummaryDto {
+  atheleteCount: number;
+  clubName: string;
+  nextCompetionLocation: string;
+  nextCompetionName: string;
 }
 
 import type {
@@ -365,17 +436,105 @@ export class Api<
         format: "json",
         ...params,
       }),
+
+    /**
+     * No description
+     *
+     * @tags user
+     * @name CreateUserWithRoleAthlete
+     * @request POST:/user/register/athlete
+     * @response `200` `UserDto` Create user with role Athlete
+     */
+    createUserWithRoleAthlete: (data: UserEntity, params: RequestParams = {}) =>
+      this.request<UserDto, any>({
+        path: `/user/register/athlete`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags user
+     * @name GetAllCompetitionByCoachId
+     * @request GET:/user/competition/coach/{coachId}
+     * @response `200` `(CompetitionDto)[]` Get all competition by coach ID
+     */
+    getAllCompetitionByCoachId: (coachId: string, params: RequestParams = {}) =>
+      this.request<CompetitionDto[], any>({
+        path: `/user/competition/coach/${coachId}`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags user
+     * @name GetAllCompetitionByAthleteId
+     * @request GET:/user/competition/athlete/{athleteId}
+     * @response `200` `(CompetitionDto)[]` Get all competition by athlete ID
+     */
+    getAllCompetitionByAthleteId: (
+      athleteId: string,
+      params: RequestParams = {},
+    ) =>
+      this.request<CompetitionDto[], any>({
+        path: `/user/competition/athlete/${athleteId}`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags user
+     * @name GetAllDataDashboardByCoachId
+     * @request GET:/user/coach/dashboard/{coachId}
+     * @response `200` `UserSummaryDto` Get all data dashboard by coach ID
+     */
+    getAllDataDashboardByCoachId: (
+      coachId: string,
+      params: RequestParams = {},
+    ) =>
+      this.request<UserSummaryDto, any>({
+        path: `/user/coach/dashboard/${coachId}`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags user
+     * @name GetAllProgramByAthleteId
+     * @request GET:/user/data/athlete/{athleteId}
+     * @response `200` `(AthleteDto)[]` Get all program by athlete ID
+     */
+    getAllProgramByAthleteId: (athleteId: string, params: RequestParams = {}) =>
+      this.request<AthleteDto[], any>({
+        path: `/user/data/athlete/${athleteId}`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
   };
   program = {
     /**
      * No description
      *
      * @tags program
-     * @name ProgramControllerFindAll
+     * @name GetAllPrograms
      * @request GET:/program
      * @response `200` `void`
      */
-    programControllerFindAll: (params: RequestParams = {}) =>
+    getAllPrograms: (params: RequestParams = {}) =>
       this.request<void, any>({
         path: `/program`,
         method: "GET",
@@ -386,14 +545,128 @@ export class Api<
      * No description
      *
      * @tags program
-     * @name ProgramControllerFindOne
-     * @request GET:/program/{userId}
-     * @response `200` `void`
+     * @name GetProgramByUserId
+     * @request GET:/program/{coachId}
+     * @response `200` `ProgramDto` Returns the program for the specified user ID
      */
-    programControllerFindOne: (userId: string, params: RequestParams = {}) =>
-      this.request<void, any>({
-        path: `/program/${userId}`,
+    getProgramByUserId: (coachId: string, params: RequestParams = {}) =>
+      this.request<ProgramDto, any>({
+        path: `/program/${coachId}`,
         method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags program
+     * @name GetProgramsByCoachId
+     * @request GET:/program/coach/{coachId}
+     * @response `200` `(ProgramDto)[]` Returns an array of programs for the specified coach ID
+     */
+    getProgramsByCoachId: (coachId: string, params: RequestParams = {}) =>
+      this.request<ProgramDto[], any>({
+        path: `/program/coach/${coachId}`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags program
+     * @name CreateANewProgram
+     * @request POST:/program/create
+     * @response `201` `ProgramDto` Returns the created program
+     */
+    createANewProgram: (data: ProgramEntity, params: RequestParams = {}) =>
+      this.request<ProgramDto, any>({
+        path: `/program/create`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags program
+     * @name DeleteAProgram
+     * @request POST:/program/delete/{id}
+     * @response `200` `void` Returns a success message
+     */
+    deleteAProgram: (id: string, params: RequestParams = {}) =>
+      this.request<void, any>({
+        path: `/program/delete/${id}`,
+        method: "POST",
+        ...params,
+      }),
+  };
+  competition = {
+    /**
+     * No description
+     *
+     * @tags competition
+     * @name GetAllCompetitions
+     * @request GET:/competition
+     * @response `200` `(CompetitionDto)[]` Returns a list of all competitions
+     */
+    getAllCompetitions: (params: RequestParams = {}) =>
+      this.request<CompetitionDto[], any>({
+        path: `/competition`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags competition
+     * @name GetCompetitionsByUserId
+     * @request GET:/competition/user/{userId}
+     * @response `200` `(CompetitionDto)[]` Returns a list of competitions for a specific user
+     */
+    getCompetitionsByUserId: (userId: string, params: RequestParams = {}) =>
+      this.request<CompetitionDto[], any>({
+        path: `/competition/user/${userId}`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags competition
+     * @name CreateANewCompetition
+     * @request POST:/competition/create
+     * @response `200` `CompetitionDto` Returns the created competition
+     */
+    createANewCompetition: (params: RequestParams = {}) =>
+      this.request<CompetitionDto, any>({
+        path: `/competition/create`,
+        method: "POST",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags competition
+     * @name DeleteACompetitionById
+     * @request POST:/competition/delete/{id}
+     * @response `200` `void` Deletes a competition by ID
+     */
+    deleteACompetitionById: (id: string, params: RequestParams = {}) =>
+      this.request<void, any>({
+        path: `/competition/delete/${id}`,
+        method: "POST",
         ...params,
       }),
   };
@@ -427,6 +700,37 @@ export class Api<
         path: `/notification/${userId}/conversations`,
         method: "GET",
         format: "json",
+        ...params,
+      }),
+  };
+  club = {
+    /**
+     * No description
+     *
+     * @tags club
+     * @name GetAthletesByCoachId
+     * @request GET:/club/{coachId}/athletes
+     * @response `200` `void`
+     */
+    getAthletesByCoachId: (coachId: string, params: RequestParams = {}) =>
+      this.request<void, any>({
+        path: `/club/${coachId}/athletes`,
+        method: "GET",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags club
+     * @name GetCoachesByClubId
+     * @request GET:/club/{clubId}/coaches
+     * @response `200` `void`
+     */
+    getCoachesByClubId: (clubId: string, params: RequestParams = {}) =>
+      this.request<void, any>({
+        path: `/club/${clubId}/coaches`,
+        method: "GET",
         ...params,
       }),
   };
@@ -528,6 +832,28 @@ export class Api<
       this.request<any, TrainingSummaryDto>({
         path: `/trainingSession/dashboardSummary/${userId}`,
         method: "GET",
+        ...params,
+      }),
+  };
+  mail = {
+    /**
+     * No description
+     *
+     * @tags mail
+     * @name SendAthleteCredentials
+     * @request POST:/mail/send-athlete-credentials
+     * @response `200` `string` Send athlete credentials via email
+     */
+    sendAthleteCredentials: (
+      data: SendAthleteCredentialsDto,
+      params: RequestParams = {},
+    ) =>
+      this.request<string, any>({
+        path: `/mail/send-athlete-credentials`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
         ...params,
       }),
   };

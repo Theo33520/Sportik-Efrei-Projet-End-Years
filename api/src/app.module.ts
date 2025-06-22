@@ -32,6 +32,8 @@ import { TrainingSessionEntity } from './trainingSession/entities/trainingSessio
 import { TrainingSessionController } from './trainingSession/trainingSession.controller';
 import { TrainingSessionService } from './trainingSession/trainingSession.service';
 import { ProgramSeederService } from './seeder/program.seeder';
+import { MailController } from './mail/mail.controller';
+import { MailService } from './mail/mail.service';
 dotenv.config();
 
 @Module({
@@ -61,11 +63,11 @@ dotenv.config();
       TrainingSessionEntity,
     ]),
     CompetitionModule,
-    ProgramModule,
     NotificationModule,
     ClubModule,
     UserModule,
     AuthModule,
+    ProgramModule,
     TrainingSessionEntity,
   ],
   controllers: [
@@ -77,6 +79,7 @@ dotenv.config();
     ClubController,
     AuthController,
     TrainingSessionController,
+    MailController
   ],
   providers: [
     AppService,
@@ -90,6 +93,7 @@ dotenv.config();
     DatabaseSeederService,
     NotificationSeederService,
     ProgramSeederService,
+    MailService
   ],
 })
 export class AppModule {}

@@ -10,6 +10,11 @@ import {toUserDto, UserDto} from "./dto/userDto";
 import {UserProfileDto} from "./dto/user-profilDto";
 import { UserRole } from './enum/user.enum';
 import { UserRoleDto } from './dto/user-roleDto';
+import { CompetitionDto } from 'src/competition/dto/competitions.dto';
+import { CompetititonAthleteDto } from 'src/competition/dto/competitions.athlete.dto';
+import { UserSummaryDto } from './dto/user-summary.dto';
+import { ProgramDto } from 'src/program/dto/program.dto';
+import { AthleteDto } from './dto/Athlete.dto';
 
 
 @Controller(Controllers.USER)
@@ -99,5 +104,67 @@ export class UserController {
   })
   async getUserRole(@Param('id') id: string): Promise<{ role: UserRole }> {
     return this.userService.getRoleUser(id);
+  }
+
+  @UseGuards(JwtAuthGuard, IsLoggedInGuard)
+  @Post('/register/athlete')
+  @ApiOperation({ operationId: 'Create user with role Athlete' })
+  @ApiOkResponse({
+    description: 'Create user with role Athlete',
+    type: UserDto,
+  })
+  async createAthlete(@Body() user: UserEntity): Promise<UserDto> {
+    return this.userService.createAthlete(user);
+  }
+
+  @UseGuards(JwtAuthGuard, IsLoggedInGuard)
+  @Get('/competition/coach/:coachId')
+  @ApiOperation({ operationId: 'Get all competition by coach ID' })
+  @ApiOkResponse({
+    description: 'Get all competition by coach ID',
+    type: [CompetitionDto],
+  })
+  async getAllCompetitionByCoachId(
+    @Param('coachId') coachId: string,
+  ): Promise<CompetitionDto[]> {
+    return this.userService.getCompetitionsByCoach(coachId);
+  }
+
+  @UseGuards(JwtAuthGuard, IsLoggedInGuard)
+  @Get('/competition/athlete/:athleteId')
+  @ApiOperation({ operationId: 'Get all competition by athlete ID' })
+  @ApiOkResponse({
+    description: 'Get all competition by athlete ID',
+    type: [CompetitionDto],
+  })
+  async getAllCompetitionByAthleteId(
+    @Param('athleteId') athleteId: string,
+  ): Promise<CompetititonAthleteDto[]> {
+    return this.userService.getCompetitionsByAthlete(athleteId);
+  }
+
+  @UseGuards(JwtAuthGuard, IsLoggedInGuard)
+  @Get('coach/dashboard/:coachId')
+  @ApiOperation({ operationId: 'Get all data dashboard by coach ID' })
+  @ApiOkResponse({
+    description: 'Get all data dashboard by coach ID',
+    type: UserSummaryDto,
+  })
+  async getDashboardDataByCoachId(
+    @Param('coachId') coachId: string,
+  ): Promise<UserSummaryDto> {
+    return this.userService.getSummaryCoach(coachId);
+  }
+
+  @Get('data/athlete/:athleteId')
+  @ApiOperation({ operationId: 'Get all program by athlete ID' })
+  @ApiOkResponse({
+    description: 'Get all program by athlete ID',
+    type: [AthleteDto],
+  })
+  async getAllProgramByAthleteId(
+    @Param('athleteId') athleteId: string,
+  ): Promise<AthleteDto> {
+    return this.userService.getDataToAthlete(athleteId);
   }
 }

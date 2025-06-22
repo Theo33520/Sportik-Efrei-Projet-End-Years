@@ -1,4 +1,4 @@
-import {HttpException, HttpStatus, Injectable} from '@nestjs/common';
+import {HttpException, HttpStatus, Injectable, InternalServerErrorException, NotFoundException} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { UserEntity } from './entities/user.entity';
@@ -168,47 +168,69 @@ export class UserService {
   }
 
   async getSummaryCoach(coachId: string): Promise<UserSummaryDto> {
-    const coach = await this.userRepository.findOne({
-      where: { id: String(coachId), role: UserRole.COACH },
-      relations: ['club', 'competitionsAsCoach'],
-    });
+    try {
+      const coach = await this.userRepository.findOne({
+        where: { id: String(coachId), role: UserRole.COACH },
+        relations: ['club', 'competitionsAsCoach'],
+      });
 
-    if (!coach) {
-      logger.warn(`Coach with ID ${coachId} not found.`);
-      return;
-    }
-
-    const athleteCount = (await this.clubService.findAthleteByCoach(coachId))
-      .length;
-    const clubName = coach.club?.name || 'Unknown Club';
-    const currentDate = new Date();
-    let nextCompetition = null;
-    let minDiff = Infinity;
-
-    for (const competition of coach.competitionsAsCoach) {
-      const competitionDate = new Date(competition.date);
-      const diff = competitionDate.getTime() - currentDate.getTime();
-
-      if (diff > 0 && diff < minDiff) {
-        minDiff = diff;
-        nextCompetition = competition;
+      if (!coach) {
+        logger.warn(`Coach with ID ${coachId} not found.`);
+        throw new NotFoundException(`Coach with ID ${coachId} not found.`);
       }
-    }
 
-    return {
-      clubName: clubName,
-      atheleteCount: athleteCount,
-      nextCompetionName: nextCompetition.title || 'Aucune compétition à venir',
-      nextCompetionLocation: nextCompetition.location || 'Aucun lieu spécifié',
-    };
+      const athleteCount = (await this.clubService.findAthleteByCoach(coachId))
+        .length;
+      const clubName = coach.club?.name || 'Unknown Club';
+      const currentDate = new Date();
+      let nextCompetition = null;
+      let minDiff = Infinity;
+
+      for (const competition of coach.competitionsAsCoach) {
+        const competitionDate = new Date(competition.date);
+        const diff = competitionDate.getTime() - currentDate.getTime();
+
+        if (diff > 0 && diff < minDiff) {
+          minDiff = diff;
+          nextCompetition = competition;
+        }
+      }
+
+      return {
+        clubName: clubName,
+        atheleteCount: athleteCount,
+        nextCompetionName:
+          nextCompetition?.title || 'Aucune compétition à venir',
+        nextCompetionLocation:
+          nextCompetition?.location || 'Aucun lieu spécifié',
+      };
+    } catch (error) {
+      logger.error(`Error in getSummaryCoach: ${error.message}`);
+      throw new InternalServerErrorException(
+        'Une erreur est survenue lors de la récupération du résumé du coach.',
+      );
+    }
   }
 
   async getDataToAthlete(id: string): Promise<AthleteDto> {
-    const athlete = await this.userRepository.findOne({
-      where: { id: String(id), role: UserRole.ATHLETE },
-      relations: ['program', 'program.training', 'competitions'],
-    });
-    const program = athlete?.program;
-    return toAthleteDto(athlete, program);
+    try {
+      const athlete = await this.userRepository.findOne({
+        where: { id: String(id), role: UserRole.ATHLETE },
+        relations: ['program', 'program.training', 'competitions'],
+      });
+
+      if (!athlete) {
+        logger.warn(`Athlete with ID ${id} not found.`);
+        throw new NotFoundException(`Athlete with ID ${id} not found.`);
+      }
+
+      const program = athlete.program;
+      return toAthleteDto(athlete, program);
+    } catch (error) {
+      logger.error(`Error in getDataToAthlete: ${error.message}`);
+      throw new InternalServerErrorException(
+        'Une erreur est survenue lors de la récupération des données de l’athlète.',
+      );
+    }
   }
 }

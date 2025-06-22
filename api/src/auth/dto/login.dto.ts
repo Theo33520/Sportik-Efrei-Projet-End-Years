@@ -22,16 +22,16 @@ export class LoginUserRequestDto {
 }
 
 export class LoginUserResponseDto {
+  @ApiProperty()
+  id!: string;
 
-    @ApiProperty()
-    id!: string;
+  @ApiProperty({
+    enum: UserRole,
+    enumName: 'UserRole',
+    example: UserRole.ATHLETE,
+  })
+  roleType!: UserRole;
 
-    @ApiProperty({
-        enum: UserRole,
-        enumName: 'UserRole',
-        example: UserRole.ATHLETE,
-    })
-    roleType!: UserRole;
 }
 
 export class LoginResponseDto {
@@ -47,5 +47,5 @@ export const toLoginUserResponseDto = (
     user: UserEntity,
 ): LoginUserResponseDto => ({
     id: user.id,
-    roleType: user.role
+    roleType: user.role,
 });

@@ -117,4 +117,7 @@ export class UserEntity {
 
   @OneToMany(() => CompetitionEntity, (competition) => competition.coach)
   competitionsAsCoach: CompetitionEntity[];
+
+  @Column({ default: 0 })
+  tokenVersion: number;
 }

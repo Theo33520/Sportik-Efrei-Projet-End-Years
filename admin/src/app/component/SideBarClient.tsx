@@ -1,4 +1,3 @@
-// components/layout/SidebarClient.tsx
 "use client";
 
 import { useRouter } from "next/navigation";
@@ -16,6 +15,17 @@ export default function SidebarClient({
 
   const handleLogout = async () => {
     try {
+      const response = await fetch("/api/auth/logout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      });
+      if (!response.ok) {
+        throw new Error("Échec de la déconnexion");
+      }
+
       toast({
         title: "Déconnecté",
         description: "Vous avez été déconnecté",
@@ -23,18 +33,20 @@ export default function SidebarClient({
         duration: 1500,
         isClosable: true,
       });
+
       router.push("/");
     } catch (error) {
-        console.error("Erreur lors de la déconnexion:", error);
-        toast({
-            title: "Erreur",
-            description: "Une erreur est survenue lors de la déconnexion.",
-            status: "error",
-            duration: 1500,
-            isClosable: true,
-        });
+      console.error("Erreur lors de la déconnexion:", error);
+      toast({
+        title: "Erreur",
+        description: "Une erreur est survenue lors de la déconnexion.",
+        status: "error",
+        duration: 1500,
+        isClosable: true,
+      });
     }
   };
+
 
   return (
     <SidebarDashboard

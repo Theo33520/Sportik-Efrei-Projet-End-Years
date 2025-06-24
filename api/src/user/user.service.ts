@@ -21,6 +21,7 @@ import { ClubService } from 'src/club/club.service';
 import { ProgramDto } from 'src/generated/typing';
 import { toProgramDto } from 'src/program/dto/program.dto';
 import { AthleteDto, toAthleteDto } from './dto/Athlete.dto';
+import { CompetitionEntity } from 'src/competition/entities/competition.entity';
 
 @Injectable()
 export class UserService {
@@ -30,6 +31,8 @@ export class UserService {
     @InjectRepository(ClubEntity)
     private readonly clubRepository: Repository<ClubEntity>,
     private readonly clubService: ClubService,
+    @InjectRepository(CompetitionEntity)
+    private readonly competitionRepository: Repository<CompetitionEntity>,
   ) {}
 
   async findAll(): Promise<UserDto[]> {
@@ -232,5 +235,24 @@ export class UserService {
         'Une erreur est survenue lors de la récupération des données de l’athlète.',
       );
     }
+  }
+
+  async getSummaryAdmin(id: string): Promise<void> {
+    const club = await this.clubRepository.count();
+    if (!club) {
+      throw new NotFoundException('Aucun club trouvé');
+    }
+    const competition = await this.competitionRepository.count();
+    if (!competition) {
+      throw new NotFoundException('Aucune compétition trouvée');
+    }
+    const athlete = await this.userRepository.count({
+      where: { role: UserRole.ATHLETE },
+    });
+
+    const coach = await this.userRepository.count({
+      where: { role: UserRole.COACH },
+    });
+
   }
 }

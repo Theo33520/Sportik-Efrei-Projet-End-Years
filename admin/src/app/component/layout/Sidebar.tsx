@@ -58,6 +58,7 @@ const navItemsByRole: Record<string, NavItem[]> = {
   ],
 };
 
+
 export default function SidebarDashboard({
   isOpen,
   firstname,

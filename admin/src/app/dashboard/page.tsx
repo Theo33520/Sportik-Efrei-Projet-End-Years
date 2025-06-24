@@ -1,19 +1,25 @@
 import { Box, Heading, Text } from "@chakra-ui/react";
-import { getSummaryCoach, getUser, getUserSummary } from "@/app/utils/fetchAuth";
+import {
+  getSummaryCoach,
+  getUser,
+  getUserSummary,
+} from "@/app/utils/fetchAuth";
 import AthleteDashboard from "./components/AtheleteDashboard";
 import CoachDashboard from "./components/CoachDashboard";
+import AdminDashboard from "./components/AdminDashboard";
 
 
 export default async function UserDashboardPage() {
   const user_data = await getUser();
-  const userSummary = user_data?.user_id
-    ? await getUserSummary(user_data.user_id)
-    : null;
-  const coachSummary = user_data?.user_id
-    ? await getSummaryCoach(user_data.user_id)
-    : null;
 
-  console.log("coachSummary", coachSummary);
+  const userId = user_data?.user_id;
+  const role = user_data?.role;
+
+  const [userSummary, coachSummary] = await Promise.all([
+    role === "ATHLETE" && userId ? getUserSummary(userId) : null,
+    role === "COACH" && userId ? getSummaryCoach(userId) : null,
+  ]);
+
   return (
     <Box p={6}>
       <Box mb={6}>
@@ -25,15 +31,15 @@ export default async function UserDashboardPage() {
         </Text>
       </Box>
 
-      {user_data?.role === "COACH" ? (
-        coachSummary ? (
-          coachSummary ? (
-            <CoachDashboard coachSummary={coachSummary} />
-          ) : null
-        ) : null
-      ) : userSummary ? (
+      {role === "COACH" && coachSummary && (
+        <CoachDashboard coachSummary={coachSummary} />
+      )}
+
+      {role === "ATHLETE" && userSummary && (
         <AthleteDashboard userSummary={userSummary} />
-      ) : null}
+      )}
+
+      {role === "ADMINISTRATOR" && <AdminDashboard />}
     </Box>
   );
 }

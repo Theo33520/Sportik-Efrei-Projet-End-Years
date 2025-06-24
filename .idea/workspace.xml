@@ -5,38 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d3a7c5f7-1a77-4974-8aa0-7a60e0cd5bcd" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/admin/src/app/actions/updateProfilForm.ts" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/app/actions/updateProfilForm.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/src/app/component/DashboardLayout.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/src/app/component/SideBarClient.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/app/component/SideBarClient.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/src/app/component/layout/Sidebar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/app/component/layout/Sidebar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/src/app/dashboard/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/app/dashboard/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/admin/src/app/dashboard/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/app/dashboard/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/src/app/notifications/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/app/notifications/layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/src/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/app/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/src/app/profil/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/app/profil/layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/src/app/profil/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/app/profil/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/src/app/program/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/app/program/layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/src/app/utils/user.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/src/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/src/club/club.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/club/club.controller.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/src/club/club.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/club/club.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/src/club/entities/club.entity.ts" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/club/entities/club.entity.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/src/common/controller.enum.ts" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/common/controller.enum.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/src/generated/typing.ts" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/generated/typing.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/src/program/dto/program.dto.ts" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/program/dto/program.dto.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/src/program/entities/program.entity.ts" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/program/entities/program.entity.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/src/program/program.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/program/program.controller.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/src/program/program.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/program/program.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/src/seeder/program.seeder.ts" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/seeder/program.seeder.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/src/seeder/user.seeder.ts" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/seeder/user.seeder.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/src/trainingSession/dto/Training-summary.dto.ts" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/trainingSession/dto/Training-summary.dto.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/src/trainingSession/dto/TranningSession.dto.ts" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/trainingSession/dto/TranningSession.dto.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/src/trainingSession/trainingSession.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/trainingSession/trainingSession.controller.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/src/trainingSession/trainingSession.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/trainingSession/trainingSession.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/src/user/dto/user-roleDto.ts" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/user/dto/user-roleDto.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/src/user/dto/userDto.ts" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/user/dto/userDto.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/src/user/entities/user.entity.ts" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/user/entities/user.entity.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/src/user/user.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/user/user.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/src/user/user.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/user/user.module.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/src/user/user.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/user/user.service.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -70,27 +43,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "Node.js.program.service.ts.executor": "Debug",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "Shell Script.Api.executor": "Run",
-    "git-widget-placeholder": "main",
-    "junie.onboarding.icon.badge.shown": "true",
-    "last_opened_file_path": "/Users/neat/Downloads/Sportik-Efrei-Projet-End-Years",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "prettierjs.PrettierConfiguration.Package": "/Users/neat/Downloads/Sportik-Efrei-Projet-End-Years/api/node_modules/prettier",
-    "settings.editor.selected.configurable": "reference.settingsdialog.IDE.editor.colors.Color Scheme Font",
-    "ts.external.directory.path": "/Users/neat/Downloads/Sportik-Efrei-Projet-End-Years/admin/node_modules/typescript/lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;Node.js.program.service.ts.executor&quot;: &quot;Debug&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;Shell Script.Api.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/neat/Downloads/Sportik-Efrei-Projet-End-Years&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;/Users/neat/Downloads/Sportik-Efrei-Projet-End-Years/api/node_modules/prettier&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.IDE.editor.colors.Color Scheme Font&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Users/neat/Applications/IntelliJ IDEA Ultimate.app/Contents/plugins/javascript-plugin/jsLanguageServicesImpl/external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/api/src/program/dto" />
@@ -127,7 +100,11 @@
       <workItem from="1749670771804" duration="2000" />
       <workItem from="1749714073030" duration="105000" />
       <workItem from="1750509270328" duration="13000" />
-      <workItem from="1750509309693" duration="187000" />
+      <workItem from="1750509309693" duration="962000" />
+      <workItem from="1750682877797" duration="18000" />
+      <workItem from="1750682907724" duration="104000" />
+      <workItem from="1750683016917" duration="254000" />
+      <workItem from="1750683356145" duration="10000" />
     </task>
     <servers />
   </component>

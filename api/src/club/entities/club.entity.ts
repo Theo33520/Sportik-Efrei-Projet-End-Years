@@ -16,4 +16,7 @@ export class ClubEntity {
 
     @OneToMany(() => UserEntity, (user) => user.club)
     users: UserEntity[];
+
+    @Column({nullable: true})
+    createAt?: Date;
 }

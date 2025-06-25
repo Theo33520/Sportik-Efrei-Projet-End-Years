@@ -6,22 +6,18 @@ import {toUserDto, UserDto} from "./dto/userDto";
 import {toUserProfilDto, UserProfileDto} from "./dto/user-profilDto";
 import * as bcrypt from 'bcrypt';
 import { UserRole } from './enum/user.enum';
-import * as jwt from 'jsonwebtoken';
-import { ConfigService } from '@nestjs/config';
 import {jwtConstants} from "../auth/constants";
-import { use } from 'passport';
 import { AthleteCategory } from './enum/atheleteCategory.enum';
 import { CompetitionDto, toCompetitionDto } from 'src/competition/dto/competitions.dto';
-import { logger } from '@mikro-orm/nestjs';
 import { CompetititonAthleteDto, toComppetititonAthleteDto } from 'src/competition/dto/competitions.athlete.dto';
 import { UserSummaryDto } from './dto/user-summary.dto';
-import { log } from 'console';
 import { ClubEntity } from 'src/club/entities/club.entity';
 import { ClubService } from 'src/club/club.service';
 import { ProgramDto } from 'src/generated/typing';
 import { toProgramDto } from 'src/program/dto/program.dto';
 import { AthleteDto, toAthleteDto } from './dto/Athlete.dto';
 import { CompetitionEntity } from 'src/competition/entities/competition.entity';
+import { logger } from '@mikro-orm/nestjs';
 
 @Injectable()
 export class UserService {
@@ -80,6 +76,7 @@ export class UserService {
   }
 
   async create(data: Partial<UserEntity>): Promise<UserEntity> {
+    data.password = await bcrypt.hash(data.password, 10);
     const isExisting = await this.userRepository.findOne({
       where: { email: String(data.email) },
     });

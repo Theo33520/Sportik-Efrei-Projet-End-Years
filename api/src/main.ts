@@ -4,11 +4,35 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import * as dotenv from 'dotenv';
 import { ConsoleLogger } from '@nestjs/common';
 import { json } from 'stream/consumers';
+import helmet from 'helmet';
 dotenv.config();
 
 async function bootstrap() {
 
   const app = await NestFactory.create(AppModule);
+  
+  app.use(
+    helmet({
+      crossOriginEmbedderPolicy: false,
+      contentSecurityPolicy: {
+        directives: {
+          imgSrc: [
+            `'self'`,
+            'data:',
+            'apollo-server-landing-page.cdn.apollographql.com',
+          ],
+          scriptSrc: [`'self'`, `https: 'unsafe-inline'`],
+          manifestSrc: [
+            `'self'`,
+            'apollo-server-landing-page.cdn.apollographql.com',
+          ],
+          frameSrc: [`'self'`, 'sandbox.embed.apollographql.com'],
+        },
+      },
+    }),
+  );
+
+  
   app.enableCors({
     credentials: true,
     origin: 'http://localhost:3002',

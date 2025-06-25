@@ -7,10 +7,38 @@ services:
       POSTGRES_USER: sportik_db
       POSTGRES_PASSWORD: root
     ports:
-      - "5433:5432"
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -d sportilk -U sportik_db -p 5432"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     volumes:
       - db_data:/var/lib/postgresql/data
     restart: unless-stopped
+  admin:
+    build: ./admin
+    container_name: sportilk_admin
+    ports:
+      - "4000:4000"
+    restart: unless-stopped
+    depends_on:
+      - db
+  api:
+    build: ./api
+    container_name: sportilk_api
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_NAME: sportilk
+      DB_USER: sportik_db
+      DB_PASSWORD: root
 
   adminer:
     image: adminer
@@ -20,5 +48,6 @@ services:
     restart: unless-stopped
     depends_on:
       - db
+
 volumes:
   db_data:

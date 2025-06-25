@@ -38,22 +38,32 @@ dotenv.config();
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      port: parseInt(process.env.PORT_DB),
-      username: process.env.USER_DB,
-      password: process.env.PASSWORD_DB,
-      database: process.env.NAME_DB,
-      synchronize: true,
-      entities: [
-        UserEntity,
-        ClubEntity,
-        ProgramEntity,
-        NotificationEntity,
-        CompetitionEntity,
-        TrainingSessionEntity,
-      ],
-    }),
+    (() => {
+      console.log('Database connection details:', {
+        type: 'postgres',
+        port: parseInt(process.env.PORT_DB),
+        username: process.env.USER_DB,
+        password: process.env.PASSWORD_DB,
+        database: process.env.NAME_DB,
+      });
+      return TypeOrmModule.forRoot({
+        type: 'postgres',
+        host: process.env.HOST_DB,
+        port: parseInt(process.env.PORT_DB),
+        username: process.env.USER_DB,
+        password: process.env.PASSWORD_DB,
+        database: process.env.NAME_DB,
+        synchronize: true,
+        entities: [
+          UserEntity,
+          ClubEntity,
+          ProgramEntity,
+          NotificationEntity,
+          CompetitionEntity,
+          TrainingSessionEntity,
+        ],
+      });
+    })(),
     TypeOrmModule.forFeature([
       UserEntity,
       ClubEntity,

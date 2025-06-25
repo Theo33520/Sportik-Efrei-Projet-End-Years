@@ -53,6 +53,8 @@ export class DatabaseSeederService implements OnApplicationBootstrap {
       email: process.env.COACH_EMAIL,
       password: await bcrypt.hash(process.env.COACH_PWD, 10),
       role: UserRole.COACH,
+      clubId: club.id,
+      club: club,
     });
     const athletes = [];
     for (let i = 0; i < 10; i++) {

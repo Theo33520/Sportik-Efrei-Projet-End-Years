@@ -2,7 +2,7 @@
 import { Api } from "../../../../api/src/generated/typing";
 
 
-const baseURL: string = "http://localhost:3000";
+const baseURL: string = "http://api:3000";
 
 const api = new Api({
   baseURL,

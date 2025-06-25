@@ -16,7 +16,7 @@ export async function POST(request: Request) {
     }
 
     const responseFromAuth = await fetch(
-      "http://localhost:3000/user/register/athlete",
+      "http://api:3000/user/register/athlete",
       {
         method: "POST",
         headers: {
@@ -36,7 +36,7 @@ export async function POST(request: Request) {
       );
     }
 
-    await fetch("http://localhost:3000/mail/send-athlete-credentials", {
+    await fetch("http://api:3000/mail/send-athlete-credentials", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

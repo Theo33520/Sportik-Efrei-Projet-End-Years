@@ -18,7 +18,7 @@ export async function POST(
     const programId = params.id;
 
     const responseFromAuth = await fetch(
-      `http://localhost:3000/program/delete/${programId}`,
+      `http://api:3000/program/delete/${programId}`,
       {
         method: "POST",
         headers: {

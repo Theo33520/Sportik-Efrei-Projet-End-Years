@@ -15,7 +15,7 @@ export async function POST() {
     }
 
     const responseFromAuth = await fetch(
-      "http://localhost:3000/auth/log-out",
+      "http://api:3000/auth/log-out",
       {
         method: "POST",
         headers: {

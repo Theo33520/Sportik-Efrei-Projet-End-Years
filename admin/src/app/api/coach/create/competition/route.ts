@@ -16,7 +16,7 @@ export async function POST(request: Request) {
     }
 
     const responseFromAuth = await fetch(
-      "http://localhost:3000/competition/create",
+      "http://api:3000/competition/create",
       {
         method: "POST",
         headers: {

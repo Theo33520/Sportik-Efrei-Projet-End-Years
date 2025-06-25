@@ -20,7 +20,7 @@ export async function GET() {
       );
     }
 
-    const url = `http://localhost:3000/user/${userId}/role`;
+    const url = `http://api:3000/user/${userId}/role`;
     const res = await fetch(url, {
       method: "GET",
       headers: {

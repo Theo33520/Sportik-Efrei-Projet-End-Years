@@ -18,7 +18,7 @@ export async function POST(
     const competitionId = params.id;
 
     const responseFromAuth = await fetch(
-      `http://localhost:3000/competition/delete/${competitionId}`,
+      `http://api:3000/competition/delete/${competitionId}`,
       {
         method: "POST",
         headers: {

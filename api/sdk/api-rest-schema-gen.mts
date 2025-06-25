@@ -6,7 +6,7 @@ import * as path from 'path';
     await generateApi({
         fileName: 'typing.ts',
         output: path.resolve(process.cwd(), './src/generated'),
-        url: "http://localhost:3000/swagger.json",
+        url: "http://api:3000/swagger.json",
         httpClientType: 'axios',
         generateClient: true,
         generateResponses: true,

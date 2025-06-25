@@ -4,14 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d3a7c5f7-1a77-4974-8aa0-7a60e0cd5bcd" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/src/app/dashboard/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/app/dashboard/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/src/club/entities/club.entity.ts" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/club/entities/club.entity.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/src/user/user.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/user/user.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/src/user/user.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/user/user.service.ts" afterDir="false" />
-    </list>
+    <list default="true" id="d3a7c5f7-1a77-4974-8aa0-7a60e0cd5bcd" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -82,7 +75,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-b26f3e71634d-JavaScript-WS-251.26094.131" />
+        <option value="bundled-jdk-9823dce3aa75-fbdcb00ec9e3-intellij.indexing.shared.core-IU-251.26094.121" />
+        <option value="bundled-js-predefined-d6986cc7102b-b26f3e71634d-JavaScript-IU-251.26094.121" />
       </set>
     </attachedChunks>
   </component>
@@ -105,6 +99,8 @@
       <workItem from="1750682907724" duration="104000" />
       <workItem from="1750683016917" duration="254000" />
       <workItem from="1750683356145" duration="10000" />
+      <workItem from="1750755448314" duration="11000" />
+      <workItem from="1750755475468" duration="1880000" />
     </task>
     <servers />
   </component>

@@ -1,5 +1,7 @@
 // api.ts
-import { Api } from "../../../../api/src/generated/typing";
+
+import { Api } from "@/generated/typing";
+
 
 
 const baseURL: string = "http://api:3000";

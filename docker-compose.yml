@@ -16,6 +16,7 @@ services:
     volumes:
       - db_data:/var/lib/postgresql/data
     restart: unless-stopped
+
   admin:
     build: ./admin
     container_name: sportilk_admin
@@ -24,6 +25,11 @@ services:
     restart: unless-stopped
     depends_on:
       - db
+    volumes:
+      - ./admin:/app/admin
+      - shared_types:/app/admin/src/generated
+      - /app/admin/node_modules
+
   api:
     build: ./api
     container_name: sportilk_api
@@ -39,6 +45,10 @@ services:
       DB_NAME: sportilk
       DB_USER: sportik_db
       DB_PASSWORD: root
+    volumes:
+      - ./api:/app/api
+      - shared_types:/app/api/src/generated
+      - /app/api/node_modules
 
   adminer:
     image: adminer
@@ -51,3 +61,4 @@ services:
 
 volumes:
   db_data:
+  shared_types:
